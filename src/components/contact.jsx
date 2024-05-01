@@ -15,6 +15,7 @@ const Contact = ({ toggleDetails }) => {
 
   const onSubmit =(data) => {
     localStorage.setItem("formData", JSON.stringify(data));
+    alert("Form submitted successfully");
     reset();
   };
 
