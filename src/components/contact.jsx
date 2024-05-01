@@ -13,33 +13,10 @@ const Contact = ({ toggleDetails }) => {
   } = useForm();
 
 
-  const onSubmit = async (data) => {
-    try {
-      const fileInput = document.getElementById("fileInput");
-      const file = fileInput.files[0];
-
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await axios.post("/api/upload", formData); // Use relative URL for serverless function
-
-      if (response.status === 200) {
-        const { blobUrl } = response.data;
-        // Save form data with blobUrl to localStorage or perform other actions
-        const formDataWithBlob = { ...data, fileUrl: blobUrl };
-        localStorage.setItem("formData", JSON.stringify(formDataWithBlob));
-        console.log("Data saved to local storage with blobUrl:", formDataWithBlob);
-
-        // Reset form after successful submission
-        reset();
-      } else {
-        console.error("Error uploading file:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error.message);
-    }
+  const onSubmit =(data) => {
+    localStorage.setItem("formData", JSON.stringify(data));
+    reset();
   };
-
 
 
   const saveData = () => {
